@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="webdevelopment.secondsystem.dao.DormitoryMapper">
+    <resultMap id="Dormitory" type="webdevelopment.secondsystem.domain.entity.Dormitory">
+        <id column="id" property="id"></id>
+        <result column="room_id" property="roomId"></result>
+        <result column="building_id" property="buildingId"></result>
+        <result column="bed_count_all" property="bedCountAll"></result>
+        <result column="bed_count_available" property="bedCountAvailable"></result>
+        <result column="user_gender" property="userGender"></result>
+        <result column="bed_count_free" property="bedCountFree"></result>
+        <result column="is_empty" property="isEmpty"></result>
+        <result column="room_member_id_list" property="roomMemberIdList"></result>
+    </resultMap>
+    <insert id="insert">
+        INSERT INTO dormitory(room_id, building_id, bed_count_all, bed_count_available, user_gender, bed_count_free, is_empty, room_member_id_list) values (#{roomId}, #{buildingId}, #{bedCountAll}, #{bedCountAvailable}, #{userGender}, #{bedCountFree}, #{isEmpty}, #{roomMemberIdList})
+    </insert>
+    <select id="findByRoomAndBuildingId" resultMap="Dormitory">
+        SELECT * FROM dormitory WHERE room_id=#{roomId} and building_id=#{buildingId}
+    </select>
+    <select id="findFreeDormitoriesByBuildingId" resultMap="Dormitory">
+        SELECT * FROM dormitory WHERE building_id=#{buildingId} and bed_count_free>0
+    </select>
+    <select id="findFreeDormitoriesByConditions" resultMap="Dormitory">
+        SELECT * FROM dormitory WHERE building_id=#{buildingId} and bed_count_free>=#{neededBedNumber} and user_gender=#{gender}
+    </select>
+    <delete id="deleteByRoomAndBuildingId">
+        DELETE FROM dormitory WHERE room_id=#{roomId} and building_id=#{buildingId}
+    </delete>
+    <update id="update">
+        UPDATE dormitory SET room_id=#{roomId}, building_id=#{buildingId}, bed_count_all=#{bedCountAll}, bed_count_available=#{bedCountAvailable}, user_gender=#{userGender}, bed_count_free=#{bedCountFree}, is_empty=#{isEmpty}, room_member_id_list=#{roomMemberIdList} WHERE room_id=#{roomId} and building_id=#{buildingId}
+    </update>
+</mapper>

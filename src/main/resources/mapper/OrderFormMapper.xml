@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="webdevelopment.secondsystem.dao.OrderFormMapper">
+    <resultMap id="OrderForm" type="webdevelopment.secondsystem.domain.entity.OrderForm">
+        <result column="order_id" property="orderId"></result>
+        <result column="building_id" property="buildingId"></result>
+        <result column="apply_time" property="applyTime"></result>
+        <result column="apply_member_number" property="applyMemberNumber"></result>
+        <result column="apply_member_id_list" property="applyMemberIdList"></result>
+        <result column="apply_member_code_list" property="applyMemberCodeList"></result>
+        <result column="order_status" property="orderStatus"></result>
+        <result column="gender" property="gender"></result>
+    </resultMap>
+    <insert id="insert">
+        INSERT INTO order_form(order_id, building_id, apply_time, apply_member_number, apply_member_id_list, apply_member_code_list, order_status, gender) VALUES (#{orderId}, #{buildingId}, #{applyTime}, #{applyMemberNumber}, #{applyMemberIdList}, #{applyMemberCodeList}, #{orderStatus}, #{gender})
+    </insert>
+    <delete id="deleteById">
+        DELETE FROM order_form WHERE order_id=#{orderId}
+    </delete>
+    <update id="update">
+        UPDATE order_form SET order_id=#{orderId}, building_id=#{buildingId}, apply_time=#{applyTime}, apply_member_number=#{applyMemberNumber}, apply_member_id_list=#{applyMemberIdList}, apply_member_code_list=#{applyMemberCodeList}, order_status=#{orderStatus}, gender=#{gender} WHERE order_id=#{orderId}
+    </update>
+    <select id="findById" resultMap="OrderForm">
+        SELECT * FROM order_form WHERE order_id=#{orderId}
+    </select>
+</mapper>

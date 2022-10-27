@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="webdevelopment.secondsystem.dao.LabelMapper">
+    <resultMap id="Label" type="webdevelopment.secondsystem.domain.entity.Label">
+        <result column="name" property="name"></result>
+        <result column="description" property="description"></result>
+    </resultMap>
+    <insert id="insert">
+        INSERT INTO label(name, description) VALUES (#{name}, #{description})
+    </insert>
+    <delete id="deleteByName">
+        DELETE FROM label WHERE name=#{name}
+    </delete>
+    <update id="update">
+        UPDATE label SET name=#{name}, description=#{description} WHERE name=#{name}
+    </update>
+    <select id="findByName" resultMap="Label">
+        SELECT * FROM label WHERE name=#{name}
+    </select>
+    <select id="getLabelList" resultMap="Label">
+        SELECT * FROM label
+    </select>
+</mapper>

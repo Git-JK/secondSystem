@@ -1,0 +1,26 @@
+server:
+  port: 8899
+  servlet:
+    context-path: /
+spring:
+  datasource:
+    username: "miaosha"
+    password: "jinke200098cs"
+    url: "jdbc:mysql://43.143.170.221:3306/miaosha"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    port: 16379
+    database: 0
+    host: 43.143.170.221
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+    password: "jinke200098cs"
+    timeout: 1000
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

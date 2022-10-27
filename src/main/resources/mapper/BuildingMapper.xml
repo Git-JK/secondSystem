@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="webdevelopment.secondsystem.dao.BuildingMapper">
+    <resultMap id="Building" type="webdevelopment.secondsystem.domain.entity.Building">
+        <result column="building_id" property="buildingId"></result>
+        <result column="user_gender" property="userGender"></result>
+        <result column="room_count_all" property="roomCountAll"></result>
+        <result column="bed_count_all" property="bedCountAll"></result>
+        <result column="room_count_free" property="roomCountFree"></result>
+        <result column="bed_count_free" property="bedCountFree"></result>
+    </resultMap>
+    <insert id="insert">
+        INSERT INTO building(building_id, user_gender, room_count_all, bed_count_all, room_count_free, bed_count_free) values (#{buildingId}, #{userGender}, #{roomCountAll}, #{bedCountAll}, #{roomCountFree}, #{bedCountFree})
+    </insert>
+    <select id="findByBuildingId" resultMap="Building">
+        SELECT * FROM building WHERE building_id=#{buildingId}
+    </select>
+    <delete id="delete">
+        DELETE FROM building WHERE building_id=#{buildingId}
+    </delete>
+    <update id="update">
+        UPDATE building SET building_id=#{buildingId}, user_gender=#{userGender}, room_count_all=#{roomCountAll}, bed_count_all=#{bedCountAll}, room_count_free=#{roomCountFree}, bed_count_free=#{bedCountFree} WHERE building_id=#{buildingId}
+    </update>
+    <select id="findAvailableBuilding" resultMap="Building">
+        SELECT * FROM building WHERE bed_count_free>0
+    </select>
+</mapper>

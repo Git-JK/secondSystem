@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="webdevelopment.secondsystem.dao.BedMapper">
+    <resultMap id="Bed" type="webdevelopment.secondsystem.domain.entity.Bed">
+        <id column="id" property="id"></id>
+        <result column="building_id" property="buildingId"></result>
+        <result column="room_id" property="roomId"></result>
+        <result column="bed_id" property="bedId"></result>
+        <result column="student_id" property="studentId"></result>
+    </resultMap>
+    <insert id="insert">
+        INSERT INTO bed(id, building_id, room_id, bed_id, student_id) values (#{id}, #{buildingId}, #{roomId}, #{bedId}, #{studentId})
+    </insert>
+    <delete id="deleteById">
+        DELETE FROM bed WHERE building_id=#{buildingId}, room_id=#{roomId}, bed_id=#{bedId}
+    </delete>
+    <update id="update">
+        UPDATE bed SET building_id=#{buildingId}, room_id=#{roomId}, bed_id=#{bedId}, student_id=#{studentId} WHERE building_id=#{buildingId}, room_id=#{roomId}, bed_id=#{bedId}
+    </update>
+    <select id="findById" resultMap="Bed">
+        SELECT * FROM bed WHERE building_id=#{buildingId}, room_id=#{roomId}, bed_id=#{bedId}
+    </select>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="webdevelopment.secondsystem.dao.UserMapper">
+<!--    resultMap定义和哪个entity类，以及数据库表与类属性之间的对应关系-->
+    <resultMap id="User" type="webdevelopment.secondsystem.domain.entity.User">
+        <id column="id" property="id"></id>
+        <result column="student_id" property="studentId"></result>
+        <result column="name" property="name"></result>
+        <result column="gender" property="gender"></result>
+        <result column="phone_number" property="phoneNumber"></result>
+        <result column="status" property="status"></result>
+        <result column="label" property="label"></result>
+        <result column="password" property="password"></result>
+        <result column="has_bedroom" property="hasBedroom"></result>
+        <result column="bedroom_id" property="bedroomId"></result>
+        <result column="verification_code" property="verificationCode"></result>
+        <result column="user_type" property="userType"></result>
+    </resultMap>
+    <insert id="insert">
+        INSERT INTO student(student_id, name, gender, phone_number, status, label, password, has_bedroom, bedroom_id, verification_code, user_type) values (#{studentId}, #{name}, #{gender}, #{phoneNumber}, #{status}, #{label}, #{password}, #{hasBedroom}, #{bedroomId}, #{verificationCode}, #{userType})
+    </insert>
+    <select id="findByUserId" resultMap="User">
+        SELECT * FROM student WHERE student_id=#{studentId}
+    </select>
+    <delete id="deleteByUserId">
+        DELETE FROM student WHERE student_id=#{studentId}
+    </delete>
+    <update id="update">
+        UPDATE student SET student_id=#{studentId}, name=#{name}, gender=#{gender}, phone_number=#{phoneNumber}, status=#{status}, label=#{label}, password=#{password}, has_bedroom=#{hasBedroom}, bedroom_id=#{bedroomId}, verification_code=#{verificationCode}, user_type=#{userType} WHERE student_id=#{studentId}
+    </update>
+</mapper>
