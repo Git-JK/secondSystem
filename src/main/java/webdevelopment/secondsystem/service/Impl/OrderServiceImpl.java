@@ -1,6 +1,7 @@
 package webdevelopment.secondsystem.service.Impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import webdevelopment.secondsystem.dao.*;
 import webdevelopment.secondsystem.domain.dto.OrderFormDto;
 import webdevelopment.secondsystem.domain.entity.*;
@@ -25,11 +26,10 @@ public class OrderServiceImpl implements OrderService {
     private UserMapper userMapper;
     @Resource
     private DormitoryMapper dormitoryMapper;
-//    @Resource
-//    private StudentBedPairMapper studentBedPairMapper;
     @Resource
     private BuildingService buildingService;
     @Override
+    @Transactional
     public Boolean dataCheck(OrderFormDto orderFormDto) {
         Integer buildingId = orderFormDto.getBuildingId();
         Building building = buildingMapper.findByBuildingId(buildingId);
@@ -72,6 +72,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public Boolean timeCheck(OrderFormDto orderFormDto) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         Date startTime;
@@ -90,11 +91,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public synchronized OrderFormDto orderProcessing(OrderFormDto orderFormDto) {
         OrderFormDto result = new OrderFormDto();
-        OrderForm orderForm = new OrderForm(result);
+        OrderForm orderForm = new OrderForm(orderFormDto);
         result.setOrderId(orderFormDto.getOrderId());
         result.setBuildingId(orderFormDto.getBuildingId());
+        result.setApplyTime(orderFormDto.getApplyTime());
+        result.setApplyMemberNumber(orderFormDto.getApplyMemberNumber());
+        result.setApplyMemberIdList(orderFormDto.getApplyMemberIdList());
+        result.setApplyMemberCodeList(orderFormDto.getApplyMemberCodeList());
+        result.setGender(orderFormDto.getGender());
         //判断是否数据合法以及时间合法
         if(!timeCheck(orderFormDto) || !dataCheck(orderFormDto)) {
             orderForm.setOrderStatus("0");
@@ -142,7 +149,26 @@ public class OrderServiceImpl implements OrderService {
         result.setRoomId(dormitory.getRoomId());
         result.setOrderStatus("1");
         orderForm.setOrderStatus("1");
-        orderFormMapper.update(orderForm);
+        orderFormMapper.insert(orderForm);
         return result;
+    }
+
+    @Override
+    @Transactional
+    public OrderFormDto getOrderForm(Integer orderId) {
+        OrderForm orderForm = orderFormMapper.findById(orderId);
+        if(orderForm == null) {
+            throw new OrderNotFoundException("订单不存在");
+        }
+        OrderFormDto orderFormDto = new OrderFormDto();
+        orderFormDto.setOrderId(orderForm.getOrderId());
+        orderFormDto.setBuildingId(orderForm.getBuildingId());
+        orderFormDto.setApplyTime(orderForm.getApplyTime());
+        orderFormDto.setApplyMemberNumber(orderForm.getApplyMemberNumber());
+        orderFormDto.setApplyMemberCodeList(orderForm.getApplyMemberCodeList());
+        orderFormDto.setApplyMemberCodeList(orderForm.getApplyMemberCodeList());
+        orderFormDto.setOrderStatus(orderForm.getOrderStatus());
+        orderFormDto.setGender(orderForm.getGender());
+        return orderFormDto;
     }
 }

@@ -3,6 +3,7 @@ package webdevelopment.secondsystem.service;
 
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
+import webdevelopment.secondsystem.domain.entity.Dormitory;
 
 import java.util.Collection;
 import java.util.List;
@@ -127,4 +128,15 @@ public interface RedisService {
      * @return 对象列表
      */
     Collection<String> keys(String pattern);
+
+    /**
+     * 获得缓存中的对应宿舍楼、性别有至少多少床位的宿舍的信息
+     * @param buildingId
+     * @param neededBedNumber
+     * @param gender
+     * @return 返回宿舍列表（若有满足条件的宿舍），否则返回NULL
+     */
+    List<Dormitory> getDormitoryListByConditions(Integer buildingId, Integer neededBedNumber, String gender);
+
+    Long setDormitoryListByConditions(Integer buildingId, Integer neededBedNumber, String gender, List<Dormitory> dormitoryList);
 }

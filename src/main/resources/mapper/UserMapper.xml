@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="webdevelopment.secondsystem.dao.UserMapper">
 <!--    resultMap定义和哪个entity类，以及数据库表与类属性之间的对应关系-->
+    <cache type="webdevelopment.secondsystem.cache.MybatisCacheImpl" eviction="LRU"></cache>
     <resultMap id="User" type="webdevelopment.secondsystem.domain.entity.User">
         <id column="id" property="id"></id>
         <result column="student_id" property="studentId"></result>

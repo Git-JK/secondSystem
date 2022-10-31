@@ -51,6 +51,13 @@ public class OrderController {
         orderId++;
         orderFormDto.setOrderId(orderId);
         OrderFormDto result = orderService.orderProcessing(orderFormDto);
+        System.out.println(result);
         return new JsonResult<OrderFormDto>(200, "成功申请宿舍，订单处理结果如下：", result);
+    }
+
+    @PostMapping("getOrder")
+    public JsonResult<OrderFormDto> getOrder(@RequestParam("orderId") Integer orderId) {
+        OrderFormDto result = orderService.getOrderForm(orderId);
+        return new JsonResult<OrderFormDto>(200, "查询订单信息如下：", result);
     }
 }

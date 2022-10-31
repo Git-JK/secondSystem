@@ -11,16 +11,16 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class OrderFormDto {
-    private Integer orderId;
-    private Integer buildingId;
-    private Integer roomId;
-    private String roomMemberIdList;
-    private String applyTime;
-    private Integer applyMemberNumber;
-    private String applyMemberIdList;
-    private String applyMemberCodeList;
-    private String orderStatus;
-    private String gender;
+    private Integer orderId = 0;
+    private Integer buildingId = 0;
+    private Integer roomId = 0;
+    private String roomMemberIdList = "";
+    private String applyTime = "";
+    private Integer applyMemberNumber = 0;
+    private String applyMemberIdList = "";
+    private String applyMemberCodeList = "";
+    private String orderStatus = "";
+    private String gender = "";
 
     /**
      * 使用OrderFormVo初始化OrderFormDto

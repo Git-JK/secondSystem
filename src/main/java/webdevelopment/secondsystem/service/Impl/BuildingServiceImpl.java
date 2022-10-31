@@ -1,6 +1,7 @@
 package webdevelopment.secondsystem.service.Impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import webdevelopment.secondsystem.dao.BuildingMapper;
 import webdevelopment.secondsystem.domain.entity.Building;
 import webdevelopment.secondsystem.domain.entity.Dormitory;
@@ -15,10 +16,12 @@ public class BuildingServiceImpl implements BuildingService {
     @Resource
     private BuildingMapper buildingMapper;
     @Override
+    @Transactional
     public List<Building> getAvailableBuilding() {
         return buildingMapper.findAvailableBuilding();
     }
     @Override
+    @Transactional
     public Integer updateBuilding(OrderForm orderForm, Dormitory dormitory) {
         Integer buildingId = orderForm.getBuildingId();
         Integer applyMemberNumber = orderForm.getApplyMemberNumber();

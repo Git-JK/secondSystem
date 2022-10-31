@@ -69,9 +69,10 @@ public class DormitoryMapperTests {
 
     @Test
     public void findFreeDormitoriesByNeededBedNumberAndGender() {
+        Integer buildingId = 5;
         Integer neededBedNumber = 6;
         String gender = "1";
-        List<Dormitory> dormitoryList = dormitoryMapper.findFreeDormitoriesByNeededBedNumberAndGender(neededBedNumber, gender);
+        List<Dormitory> dormitoryList = dormitoryMapper.findFreeDormitoriesByConditions(buildingId, neededBedNumber, gender);
         for(Dormitory dorm: dormitoryList) {
             System.out.println(dorm);
         }

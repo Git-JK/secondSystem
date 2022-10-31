@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
+import webdevelopment.secondsystem.domain.entity.Dormitory;
 import webdevelopment.secondsystem.service.RedisService;
 import webdevelopment.secondsystem.utils.exception.RedisSetErrorException;
 
@@ -22,6 +23,7 @@ public class RedisServiceImpl implements RedisService {
     public <T> Boolean set(String key, T value) {
         Boolean result = false;
         try {
+            System.out.println(redisTemplate);
             redisTemplate.opsForValue().set(key, value);
             result = true;
         } catch (Exception e) {
@@ -114,5 +116,17 @@ public class RedisServiceImpl implements RedisService {
     @Override
     public Collection<String> keys(String pattern) {
         return redisTemplate.keys(pattern);
+    }
+
+    @Override
+    public List<Dormitory> getDormitoryListByConditions(Integer buildingId, Integer neededBedNumber, String gender) {
+        String key = String.valueOf(buildingId) + "_" + gender + "_" + String.valueOf(neededBedNumber);
+        return getList(key);
+    }
+
+    @Override
+    public Long setDormitoryListByConditions(Integer buildingId, Integer neededBedNumber, String gender, List<Dormitory> dormitoryList) {
+        String key = String.valueOf(buildingId) + "_" + gender + "_" + String.valueOf(neededBedNumber);
+        return setList(key, dormitoryList);
     }
 }

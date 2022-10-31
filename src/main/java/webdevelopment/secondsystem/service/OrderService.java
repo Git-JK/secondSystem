@@ -16,5 +16,18 @@ public interface OrderService {
      * @return
      */
     Boolean timeCheck(OrderFormDto orderFormDto);
+
+    /**
+     * 对1个订单请求进行处理
+     * @param orderFormDto
+     * @return 返回订单处理结果
+     */
     OrderFormDto orderProcessing(OrderFormDto orderFormDto);
+
+    /**
+     * 根据订单id查询订单
+     * @param orderId
+     * @return 返回订单（若存在），否则返回NULL
+     */
+    OrderFormDto getOrderForm(Integer orderId);
 }

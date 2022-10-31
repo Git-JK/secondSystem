@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 @Configuration
-public class WebConfiguration implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer {
     @Resource
     private TokenInterceptor tokenInterceptor;
 

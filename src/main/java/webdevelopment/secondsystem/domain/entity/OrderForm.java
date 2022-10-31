@@ -5,13 +5,14 @@ import lombok.NoArgsConstructor;
 import webdevelopment.secondsystem.domain.dto.OrderFormDto;
 import webdevelopment.secondsystem.domain.vo.OrderFormVo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class OrderForm {
+public class OrderForm implements Serializable {
     private Integer orderId;
     private Integer buildingId;
     private String applyTime;

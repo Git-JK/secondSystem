@@ -3,6 +3,7 @@ package webdevelopment.secondsystem.service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import webdevelopment.secondsystem.domain.entity.User;
 import webdevelopment.secondsystem.dao.BuildingMapper;
 import webdevelopment.secondsystem.dao.UserMapper;
@@ -19,6 +20,7 @@ public class IUserServiceImpl implements IUserService {
     private UserMapper userMapper;
 
     @Override
+    @Transactional
     public User login(Long studentId, String password) {
         User result = userMapper.findByUserId(studentId);
         if (result == null) {
@@ -45,11 +47,13 @@ public class IUserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional
     public User getUserInfo(Long studentId) {
         return userMapper.findByUserId(studentId);
     }
 
     @Override
+    @Transactional
     public User changePassword(User user, String newPassword) {
         user.setPassword(newPassword);
         userMapper.update(user);

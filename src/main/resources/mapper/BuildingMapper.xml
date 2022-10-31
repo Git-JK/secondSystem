@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="webdevelopment.secondsystem.dao.BuildingMapper">
+    <cache type="webdevelopment.secondsystem.cache.MybatisCacheImpl" eviction="LRU"></cache>
     <resultMap id="Building" type="webdevelopment.secondsystem.domain.entity.Building">
         <result column="building_id" property="buildingId"></result>
         <result column="user_gender" property="userGender"></result>
