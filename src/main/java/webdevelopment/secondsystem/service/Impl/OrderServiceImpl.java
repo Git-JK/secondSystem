@@ -92,7 +92,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public synchronized OrderFormDto orderProcessing(OrderFormDto orderFormDto) {
+    public OrderFormDto orderProcessing(OrderFormDto orderFormDto) {
         OrderFormDto result = new OrderFormDto();
         OrderForm orderForm = new OrderForm(orderFormDto);
         result.setOrderId(orderFormDto.getOrderId());

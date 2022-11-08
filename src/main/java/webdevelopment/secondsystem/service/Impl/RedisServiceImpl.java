@@ -1,6 +1,7 @@
 package webdevelopment.secondsystem.service.Impl;
 
 
+import com.alibaba.fastjson2.JSON;
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -128,5 +129,51 @@ public class RedisServiceImpl implements RedisService {
     public Long setDormitoryListByConditions(Integer buildingId, Integer neededBedNumber, String gender, List<Dormitory> dormitoryList) {
         String key = String.valueOf(buildingId) + "_" + gender + "_" + String.valueOf(neededBedNumber);
         return setList(key, dormitoryList);
+    }
+
+    /**
+     * bean 转 String
+     *
+     * @param value
+     * @param <T>
+     * @return
+     */
+    public static <T> String beanToString(T value) {
+        if (value == null) {
+            return null;
+        }
+        Class<?> clazz = value.getClass();
+        if (clazz == int.class || clazz == Integer.class) {
+            return "" + value;
+        } else if (clazz == String.class) {
+            return (String) value;
+        } else if (clazz == long.class || clazz == Long.class) {
+            return "" + value;
+        } else {
+            return JSON.toJSONString(value);
+        }
+    }
+
+    /**
+     * string转bean
+     *
+     * @param str
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public static <T> T stringToBean(String str, Class<T> clazz) {
+        if (str == null || str.length() <= 0 || clazz == null) {
+            return null;
+        }
+        if (clazz == int.class || clazz == Integer.class) {
+            return (T) Integer.valueOf(str);
+        } else if (clazz == String.class) {
+            return (T) str;
+        } else if (clazz == long.class || clazz == Long.class) {
+            return (T) Long.valueOf(str);
+        } else {
+            return JSON.toJavaObject(JSON.parseObject(str), clazz);
+        }
     }
 }

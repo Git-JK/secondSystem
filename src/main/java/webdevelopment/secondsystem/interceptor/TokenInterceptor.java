@@ -38,10 +38,10 @@ public class TokenInterceptor implements HandlerInterceptor {
         if(token != null) {
             Boolean result = TokenUtils.checkToken(token);
             Long studentId = redisService.get(token);
-            System.out.println(studentId);
+//            System.out.println(studentId);
             Long tokenStudentId = Long.valueOf(TokenUtils.getTokenData(token, "studentId"));
             if(result && studentId != null && studentId.equals(tokenStudentId)) {
-                System.out.println("通过拦截器");
+//                System.out.println("通过拦截器");
                 return true;
             }
         }
@@ -51,7 +51,7 @@ public class TokenInterceptor implements HandlerInterceptor {
             json.put("msg", "token check failed");
             json.put("code", "500");
             response.getWriter().append(json.toString());
-            System.out.println("认证失败，未通过拦截器");
+//            System.out.println("认证失败，未通过拦截器");
         } catch (Exception e) {
             return false;
         }

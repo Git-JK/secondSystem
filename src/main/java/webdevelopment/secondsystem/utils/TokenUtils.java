@@ -51,9 +51,9 @@ public class TokenUtils {
             //建立token验证器
             JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).withIssuer("auth0").build();
             DecodedJWT decodedJWT = jwtVerifier.verify(token);
-            System.out.println("token认证通过：");
-            System.out.println("student_id: " + decodedJWT.getClaim("studentId").asString() + " name: " + decodedJWT.getClaim("name").asString());
-            System.out.println("token过期时间：" + decodedJWT.getExpiresAt());
+//            System.out.println("token认证通过：");
+//            System.out.println("student_id: " + decodedJWT.getClaim("studentId").asString() + " name: " + decodedJWT.getClaim("name").asString());
+//            System.out.println("token过期时间：" + decodedJWT.getExpiresAt());
         } catch (IllegalArgumentException | JWTVerificationException e) {
             //抛出错误即为验证不通过
             return false;

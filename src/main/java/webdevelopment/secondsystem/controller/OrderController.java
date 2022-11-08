@@ -5,6 +5,7 @@ import webdevelopment.secondsystem.domain.entity.JsonResult;
 import webdevelopment.secondsystem.domain.entity.OrderForm;
 import webdevelopment.secondsystem.domain.dto.OrderFormDto;
 import webdevelopment.secondsystem.domain.vo.OrderFormVo;
+import webdevelopment.secondsystem.mq.MQSender;
 import webdevelopment.secondsystem.service.IUserService;
 import webdevelopment.secondsystem.service.OrderService;
 import webdevelopment.secondsystem.utils.exception.*;
@@ -18,6 +19,8 @@ public class OrderController {
     private OrderService orderService;
     @Resource
     private IUserService userService;
+    @Resource
+    private MQSender mqSender;
     private static Integer orderId = 0;
 
     @ExceptionHandler(ServiceException.class)
@@ -50,9 +53,10 @@ public class OrderController {
         OrderFormDto orderFormDto = new OrderFormDto(orderFormVo);
         orderId++;
         orderFormDto.setOrderId(orderId);
+//        mqSender.sendMessage(orderFormDto);
         OrderFormDto result = orderService.orderProcessing(orderFormDto);
         System.out.println(result);
-        return new JsonResult<OrderFormDto>(200, "成功申请宿舍，订单处理结果如下：", result);
+        return new JsonResult<OrderFormDto>(200, "成功申请宿舍，订单处理结果如下：", null);
     }
 
     @PostMapping("getOrder")

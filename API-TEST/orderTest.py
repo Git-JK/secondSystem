@@ -19,7 +19,7 @@ class ScriptTasks(TaskSet):
         header = {
             "Content": "application/json;charset=UTF-8",
             "SESSION": "YzRmNDg3ZTAtZjI1NC00YTdlLTg2YmItZjJlYjAwZmU5ZTE5",
-            "Cookie": "token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdHVkZW50SWQiOiIyMjAxMjEwMjAwIiwiaXNzIjoiYXV0aDAiLCJuYW1lIjoiam9sbHlfdHVyaW5nIiwiZXhwIjoxNjY3MDYxNjMwfQ.Uh-v-uNb5oxJ373BgbeqUG1VdLjdHcIij8oZhqcYIJ4"
+            "Cookie": "token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdHVkZW50SWQiOiIyMjAxMjEwMjAwIiwiaXNzIjoiYXV0aDAiLCJuYW1lIjoiam9sbHlfdHVyaW5nIiwiZXhwIjoxNjY3NzM2NjE1fQ.C-pxMfl5pq9HBkUKKrKAiuLEPb_rn3R68rKnDgzR27I"
         }
         response = self.client.post("/order/putOrder", json=data, headers=header)
         print(response.text)
